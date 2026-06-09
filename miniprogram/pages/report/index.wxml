@@ -1,0 +1,59 @@
+<view class="safe-shell report-page">
+  <view class="report-hero glass-panel">
+    <view class="section-label">SESSION REPORT</view>
+    <view class="report-title">{{report.sceneTitle}} 通关总结</view>
+    <view class="report-copy">{{report.summary}}</view>
+    <view class="score-ring">
+      <view class="score-value">{{report.totalScore}}</view>
+      <view class="score-label">综合得分</view>
+    </view>
+  </view>
+
+  <view class="score-grid">
+    <view class="score-card glass-panel">
+      <view class="score-card-value">{{report.fluencyScore}}</view>
+      <view class="score-card-label">流利度</view>
+    </view>
+    <view class="score-card glass-panel">
+      <view class="score-card-value">{{report.grammarScore}}</view>
+      <view class="score-card-label">语法正确率</view>
+    </view>
+    <view class="score-card glass-panel">
+      <view class="score-card-value">{{report.vocabularyScore}}</view>
+      <view class="score-card-label">词汇丰富度</view>
+    </view>
+  </view>
+
+  <view class="completion-box glass-panel">
+    <view class="completion-head">
+      <view class="completion-title">关卡达成度</view>
+      <view class="completion-score">{{report.passedStages}} / {{report.totalStages}}</view>
+    </view>
+    <progress percent="{{progressPercent}}" stroke-width="6" activeColor="#6fa3ff" backgroundColor="rgba(255,255,255,0.08)" />
+  </view>
+
+  <view class="report-block glass-panel">
+    <view class="block-title">纠错看板</view>
+    <block wx:for="{{report.correctionBoard}}" wx:key="wrong">
+      <view class="correction-item">
+        <view class="correction-label">原句</view>
+        <view class="correction-text correction-text--muted">{{item.wrong}}</view>
+        <view class="correction-label">推荐</view>
+        <view class="correction-text">{{item.right}}</view>
+        <view class="correction-reason">{{item.reason}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="report-block glass-panel">
+    <view class="block-title">黄金表达推荐</view>
+    <block wx:for="{{report.goldPhrases}}" wx:key="*this">
+      <view class="gold-line">{{index + 1}}. {{item}}</view>
+    </block>
+  </view>
+
+  <view class="footer-actions">
+    <button class="secondary-button footer-button" open-type="share">分享本次报告</button>
+    <button class="primary-button footer-button" bindtap="handleRestart">再练一局</button>
+  </view>
+</view>

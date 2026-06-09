@@ -1,0 +1,14 @@
+{
+  "appid": "touristappid",
+  "projectname": "hammond-speaking-demo",
+  "compileType": "miniprogram",
+  "miniprogramRoot": "miniprogram/",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": false
+  },
+  "simulatorType": "wechat"
+}

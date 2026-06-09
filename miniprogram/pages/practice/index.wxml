@@ -1,0 +1,72 @@
+<view class="safe-shell practice-page">
+  <view class="top-bar glass-panel">
+    <view class="top-line">
+      <view>
+        <view class="section-label">LIVE COACH</view>
+        <view class="practice-title">{{scene.title}}</view>
+      </view>
+      <button class="end-link" bindtap="handleFinishEarly">结束并生成报告</button>
+    </view>
+    <view class="stage-pill">{{stageProgressText}}</view>
+    <view class="energy-track">
+      <view class="energy-fill energy-fill--{{energyLevel}}" style="width: {{energyWidth}}%;"></view>
+    </view>
+    <view class="energy-row">
+      <text>当前表现：{{energyLabel}}</text>
+      <text>错误率 {{errorRate}}%</text>
+    </view>
+  </view>
+
+  <view class="stage-box glass-panel">
+    <view class="stage-caption">当前关卡</view>
+    <view class="stage-name">{{currentStage.title}}</view>
+    <view class="stage-goal">目标：{{currentStage.goal}}</view>
+    <view class="stage-hint">教练提醒：{{currentStage.coachHint}}</view>
+  </view>
+
+  <scroll-view scroll-y class="chat-stream glass-panel" scroll-with-animation="true" scroll-top="{{scrollTop}}">
+    <view class="chat-list">
+      <block wx:for="{{messages}}" wx:key="createdAt">
+        <view class="bubble-row bubble-row--{{item.role}}">
+          <view class="bubble bubble--{{item.role}}">
+            <view class="bubble-role">{{item.role === 'ai' ? 'AI 教练' : '你'}}</view>
+            <view class="bubble-text">{{item.text}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{feedbackSuggestion}}" class="feedback-toast">{{feedbackSuggestion}}</view>
+
+  <view class="input-box glass-panel">
+    <view class="input-head">
+      <view class="input-title">语音输入 demo 区</view>
+      <view class="input-note">当前以文本模拟 ASR 结果，后续可替换为阿里云实时识别。</view>
+    </view>
+    <textarea
+      class="practice-textarea"
+      placeholder="输入一句你想说的话，或点下方快捷短句"
+      value="{{draftText}}"
+      maxlength="300"
+      auto-height="true"
+      bindinput="handleInput"
+    />
+    <view class="quick-list">
+      <block wx:for="{{currentStage.quickReplies}}" wx:key="*this">
+        <button class="quick-chip" data-text="{{item}}" bindtap="handleQuickReply">{{item}}</button>
+      </block>
+    </view>
+    <view class="input-actions">
+      <button class="secondary-button simulate-button" bindtap="handleMockAsr">模拟识别一句</button>
+      <button class="primary-button submit-button" bindtap="handleSubmit">提交并继续</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showTransition}}" class="transition-mask">
+    <view class="transition-card glass-panel">
+      <view class="transition-kicker">{{transitionTitle}}</view>
+      <view class="transition-stage">{{transitionStageText}}</view>
+    </view>
+  </view>
+</view>
