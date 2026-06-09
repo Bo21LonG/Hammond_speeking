@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/practice/index",
+    "pages/report/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "哈蒙口语",
+    "navigationBarBackgroundColor": "#08111f",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#050b14",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,88 @@
+<view class="safe-shell home-page">
+  <view class="hero glass-panel">
+    <view class="hero-top">
+      <view>
+        <view class="section-label">HAMMOND SPEAKING</view>
+        <view class="page-title hero-title">哈蒙口语</view>
+        <view class="page-subtitle hero-copy">智能英语口语通关练习 demo，用更像游戏的方式训练你在真实场景中的开口能力。</view>
+      </view>
+      <view class="hero-badge">Demo</view>
+    </view>
+
+    <view class="hero-grid">
+      <view class="hero-stat">
+        <text class="stat-value">4</text>
+        <text class="stat-label">高频场景</text>
+      </view>
+      <view class="hero-stat">
+        <text class="stat-value">3-4</text>
+        <text class="stat-label">递进关卡</text>
+      </view>
+      <view class="hero-stat">
+        <text class="stat-value">AI</text>
+        <text class="stat-label">语音陪练</text>
+      </view>
+    </view>
+
+    <view class="hero-note">练习中会实时显示语法建议，并通过顶部能量条反馈你的当前表现。</view>
+  </view>
+
+  <view class="section-head">
+    <view>
+      <view class="section-label">SCENE SELECTOR</view>
+      <view class="section-title">选择你的通关场景</view>
+    </view>
+    <view class="section-tip">先选场景，再阅读练习机制。</view>
+  </view>
+
+  <view class="scene-list">
+    <block wx:for="{{scenes}}" wx:key="id">
+      <button class="scene-item glass-panel {{selectedSceneId === item.id ? 'scene-item--active' : ''}}" data-id="{{item.id}}" bindtap="handleSelectScene">
+        <view class="scene-main">
+          <view>
+            <view class="scene-tag" style="color: {{item.accent}}; background: {{item.accent}}22;">{{item.tag}}</view>
+            <view class="scene-title">{{item.title}}</view>
+            <view class="scene-desc">{{item.subtitle}}</view>
+          </view>
+          <view class="scene-index">0{{index + 1}}</view>
+        </view>
+        <view class="scene-footer">
+          <text>{{item.stages.length}} 个关卡</text>
+          <text>{{item.atmosphere}}</text>
+        </view>
+      </button>
+    </block>
+  </view>
+
+  <view class="launch-box glass-panel">
+    <view>
+      <view class="launch-title">练习前提醒</view>
+      <view class="launch-copy">开始后，屏幕顶部会实时显示能量条，你每说完一句，系统会在底部轻提示语法建议，不会打断 AI 持续对话。</view>
+    </view>
+    <button class="primary-button" bindtap="handleOpenGuide">开始练习</button>
+  </view>
+
+  <view wx:if="{{showGuide}}" class="guide-mask" catchtap="handleCloseGuide">
+    <view class="guide-dialog glass-panel" catchtap="noop">
+      <view class="guide-title">进入练习前，请先知道这 3 件事</view>
+      <view class="guide-list">
+        <view class="guide-item">
+          <text class="guide-index">01</text>
+          <text>顶部能量条会根据你的错误率变化颜色，绿色最稳，红色说明需要明显调整。</text>
+        </view>
+        <view class="guide-item">
+          <text class="guide-index">02</text>
+          <text>你每说完一句，底部都会淡入一条轻量纠错建议，不会打断对话节奏。</text>
+        </view>
+        <view class="guide-item">
+          <text class="guide-index">03</text>
+          <text>当 AI 判断本阶段目标已经完成，会自动切关，并在结束后生成能力报告。</text>
+        </view>
+      </view>
+      <view class="guide-actions">
+        <button class="secondary-button guide-ghost" bindtap="handleCloseGuide">再看看</button>
+        <button class="primary-button guide-start" bindtap="handleStartPractice">我知道了，开始闯关</button>
+      </view>
+    </view>
+  </view>
+</view>
